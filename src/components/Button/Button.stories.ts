@@ -19,28 +19,36 @@ type Story = StoryObj<typeof meta>;
  */
 export const Primary: Story = {
     args: {
-        children: 'Button',
+        label: 'Button',
         variant: 'primary',
     },
 };
 
 export const Secondary: Story = {
     args: {
-        children: 'Button',
+        label: 'Button',
         variant: 'secondary',
     },
 };
 
 export const Hollow: Story = {
     args: {
-        children: 'Button',
+        label: 'Button',
         variant: 'hollow',
+    },
+};
+
+export const Loading: Story = {
+    args: {
+        label: 'Button',
+        variant: 'primary',
+        loading: true,
     },
 };
 
 export const Disabled: Story = {
     args: {
-        children: 'Button',
+        label: 'Button',
         variant: 'primary',
         disabled: true,
     },

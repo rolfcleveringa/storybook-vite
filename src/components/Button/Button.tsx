@@ -1,22 +1,43 @@
 import './button.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface ButtonProps {
     /**
+     * The label of the button.
+     */
+    label?: string;
+    /**
      * The variant of the button.
      */
-    variant?: 'primary' | 'secondary' | 'hollow';
+    variant?: 'primary' | 'secondary' | 'hollow' | 'ghost';
     /**
      * The size of the button.
      */
     size?: 'default' | 'small' | 'large';
     /**
+     * The icon of the button.
+     */
+    icon?: 'none' | 'angle-right';
+    /**
+     * The icon of the button.
+     */
+    iconPosition?: 'left' | 'right';
+    /**
+     * The button type.
+     */
+    type?: 'button' | 'submit' | 'reset';
+    /**
+     * The loading state of the button.
+     */
+    loading?: boolean;
+    /**
+     * The label of the button when in loading state.
+     */
+    loadingLabel?: string;
+    /**
      * Whether the button is disabled.
      */
     disabled?: boolean;
-    /**
-     * The contents of the button.
-     */
-    children: React.ReactNode;
     /**
      * Optional click handler
      */
@@ -27,24 +48,33 @@ interface ButtonProps {
  * Primary UI component for user interaction. Use the controls in the table below to customize the preview.
  */
 export const Button = ({
+    label = '',
     variant = 'primary',
     size = 'default',
+    icon = 'none',
+    iconPosition = 'right',
+    type = 'button',
+    loading = false,
+    loadingLabel = '',
     disabled = false,
-    children,
     ...props
 }: ButtonProps) => {
     return (
         <button
-            type="button"
+            type={type}
             className={[
                 'button',
                 variant,
-                size,
+                size ? 'size-${size}' : '',
+                loading ? 'loading' : '',
                 disabled ? 'disabled' : '',
+                iconPosition ? `icon-${iconPosition}` : '',
             ].join(' ')}
             {...props}
         >
-            {children}
+            {loading ? loadingLabel : label}
+            {loading && <FontAwesomeIcon icon="spinner" spin />}
+            {!loading && icon !== 'none' && <FontAwesomeIcon icon={icon} />}
         </button>
     );
 };

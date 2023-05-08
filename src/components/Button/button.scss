@@ -35,6 +35,9 @@
 	$border-radius: var(--button-border-radius),
 	$transition: var(--button-transition)
 ) {
+	display: flex;
+    align-items: center;
+    gap: 6px;
 	margin-bottom: $margin-bottom;
 	padding: $padding;
 	border: $border-width solid transparent;
@@ -46,6 +49,23 @@
 	&.disabled {
 		opacity: .7;
 		cursor: not-allowed;
+	}
+
+	&.loading {
+		opacity: .7;
+		cursor: wait;
+	}
+
+	&.icon-left {
+		svg,
+		.icon {
+			order: -1;
+		}
+	}
+
+	svg,
+	.icon {
+		width: 8px;
 	}
 }
 
@@ -80,7 +100,7 @@
 	$color: var(--button-color-hover),
 	$icon-color: var(--button-icon-color-hover)
 ) {
-	&:not(.disabled) {
+	&:not(.disabled):not(.loading) {
 		&:hover,
 		&:focus,
 		.card-clickable:hover &,
@@ -117,8 +137,6 @@
 }
 
 .button.hollow {
-	--button-border-width: 2px;
-
 	--button-background: transparent;
 	--button-border-color: var(--black);
 	--button-color: var(--black);
@@ -128,4 +146,9 @@
 	--button-border-color-hover: var(--secondary-color);
 	--button-color-hover: var(--primary-color-dark);
 	--button-icon-color-hover: var(--button-color-hover);
+}
+
+.button.ghost {
+	--button-background: transparent;
+	--button-border-color: transparent;
 }
