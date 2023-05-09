@@ -25,7 +25,7 @@ interface ButtonProps {
     /**
      * The icon of the button.
      */
-    iconAnimation?: 'rotate' | 'right';
+    iconAnimation?: 'none' | 'rotate' | 'right';
     /**
      * The button type.
      */
