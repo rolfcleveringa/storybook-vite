@@ -24,29 +24,43 @@
 	--button-icon-color-hover: var(--button-color-hover);
 }
 
+// @media (prefers-color-scheme: dark) {
+// 	:root {
+// 		--button-padding: 3em;
+// 	}
+// }
+
+.dark,
+.theme-dark,
+.os-theme-dark {
+	--button-padding: 3em;
+}
+
 // Mixins
 // ------
 
 /// Button styling.
-@mixin ds-button-base(
-	$margin-bottom: var(--button-margin-bottom),
-	$padding: var(--button-padding),
-	$border-width: var(--button-border-width),
-	$border-radius: var(--button-border-radius),
-	$transition: var(--button-transition)
-) {
+@mixin ds-button-base() {
 	display: flex;
     align-items: center;
     gap: 6px;
-	margin-bottom: $margin-bottom;
-	padding: $padding;
-	border: $border-width solid transparent;
-	border-radius: $border-radius;
+	margin-bottom: var(--button-margin-bottom);
+	padding: var(--button-padding);
+	background: var(--button-background);
+	border: var(--button-border-width) solid var(--button-border-color);
+	border-radius: var(--button-border-radius);
+	color: var(--button-color);
 	cursor: pointer;
 	line-height: 1;
-	transition: $transition;
+	transition: var(--button-transition);
 
-	&.disabled {
+	.icon {
+		color: var(--button-icon-color);
+	}
+
+	&:disabled,
+	&.disabled,
+	&[aria-disabled='true'] {
 		opacity: .7;
 		cursor: not-allowed;
 	}
@@ -67,50 +81,16 @@
 	.icon {
 		width: 8px;
 	}
-}
 
-/// Button colors.
-/// @param {Color} $background - Background color of the button.
-/// @param {String} $border-color - Border of the button.
-/// @param {Color} $color - Text color of the button.
-/// @param {Number} $icon-color - Color of the icon.
-@mixin ds-button-color(
-	$background: var(--button-background),
-	$border-color: var(--button-border-color),
-	$color: var(--button-color),
-	$icon-color: var(--button-icon-color)
-) {
-	background: $background;
-	border-color: $border-color;
-	color: $color;
-
-	.icon {
-		color: $icon-color;
-	}
-}
-
-/// Button hover styling.
-/// @param {Color} $background - Background color of the button.
-/// @param {String} $border - Border of the button.
-/// @param {Color} $color - Text color of the button.
-/// @param {Number} $icon-color - Color of the icon.
-@mixin ds-button-hover(
-	$background: var(--button-background-hover),
-	$border-color: var(--button-border-color-hover),
-	$color: var(--button-color-hover),
-	$icon-color: var(--button-icon-color-hover)
-) {
 	&:not(.disabled):not(.loading) {
 		&:hover,
 		&:focus,
 		.card-clickable:hover &,
 		.card-clickable:focus & {
-			@include ds-button-color(
-				$background: $background,
-				$border-color: $border-color,
-				$color: $color,
-				$icon-color: $icon-color
-			);
+			--button-background: var(--button-background-hover);
+			--button-border-color: var(--button-border-color-hover);
+			--button-color: var(--button-color-hover);
+			--button-icon-color: var(--button-icon-color-hover);
 		}
 	}
 }
@@ -120,8 +100,6 @@
 
 .button {
 	@include ds-button-base();
-	@include ds-button-color();
-	@include ds-button-hover();
 }
 
 .button.secondary {
