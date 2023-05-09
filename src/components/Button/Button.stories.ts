@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from './Button';
+import * as Icons from '@fortawesome/free-solid-svg-icons';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -9,6 +10,12 @@ const meta = {
         componentSubtitle: 'All button variants and options.',
     },
     tags: ['autodocs'],
+    argTypes: {
+        icon: {
+            control: 'select',
+            options: Icons,
+        },
+    },
 } satisfies Meta<typeof Button>;
 
 export default meta;

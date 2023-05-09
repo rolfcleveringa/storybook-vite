@@ -17,11 +17,15 @@ interface ButtonProps {
     /**
      * The icon of the button.
      */
-    icon?: 'none' | 'angle-right';
+    icon?: 'none';
     /**
      * The icon of the button.
      */
     iconPosition?: 'left' | 'right';
+    /**
+     * The icon of the button.
+     */
+    iconAnimation?: 'rotate' | 'right';
     /**
      * The button type.
      */
@@ -53,6 +57,7 @@ export const Button = ({
     size = 'default',
     icon = 'none',
     iconPosition = 'right',
+    iconAnimation = 'right',
     type = 'button',
     loading = false,
     loadingLabel = '',
@@ -65,10 +70,11 @@ export const Button = ({
             className={[
                 'button',
                 variant,
-                size ? 'size-${size}' : '',
+                size ? `size-${size}` : '',
                 loading ? 'loading' : '',
                 disabled ? 'disabled' : '',
-                iconPosition ? `icon-${iconPosition}` : '',
+                iconPosition ? `icon-position-${iconPosition}` : '',
+                iconAnimation ? `icon-animation-${iconAnimation}` : '',
             ].join(' ')}
             {...props}
         >
