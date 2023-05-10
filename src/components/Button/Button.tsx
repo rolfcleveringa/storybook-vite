@@ -1,4 +1,4 @@
-import './button.scss';
+import './_button.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface ButtonProps {
