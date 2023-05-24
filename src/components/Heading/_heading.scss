@@ -1,0 +1,49 @@
+// Heading
+// -------
+
+// Settings
+$headings: (
+	h1: var(--font-size-xxxl),
+	h2: var(--font-size-xxl),
+	h3: var(--font-size-xl),
+	h4: var(--font-size-lg),
+	h5: var(--font-size-md),
+	h6: var(--font-size-base),
+);
+
+:root {
+	// Defined with https://www.fluid-type-scale.com/calculate?minFontSize=16&minWidth=400&minRatio=1.2&maxFontSize=18&maxWidth=1280&maxRatio=1.25&steps=sm%2Cbase%2Cmd%2Clg%2Cxl%2Cxxl%2Cxxxl&baseStep=base&prefix=font-size&decimals=2&useRems=on&remValue=16&previewFont=Inter
+	--font-size-sm: clamp(0.83rem, 0.12vw + 0.8rem, 0.9rem);
+	--font-size-base: clamp(1rem, 0.23vw + 0.94rem, 1.13rem);
+	--font-size-md: clamp(1.2rem, 0.38vw + 1.11rem, 1.41rem);
+	--font-size-lg: clamp(1.44rem, 0.58vw + 1.3rem, 1.76rem);
+	--font-size-xl: clamp(1.73rem, 0.85vw + 1.51rem, 2.2rem);
+	--font-size-xxl: clamp(2.07rem, 1.22vw + 1.77rem, 2.75rem);
+	--font-size-xxxl: clamp(2.49rem, 1.72vw + 2.06rem, 3.43rem);
+
+	@each $heading, $size in $headings {
+		--#{$heading}-font-size: #{$size};
+	}
+}
+
+// Functions
+@function headings($from: 1, $to: 6) {
+    @if $from == $to {
+        @return 'h#{$from}';
+    } @else {
+        @return 'h#{$from},' + headings($from+1, $to);
+    }
+}
+
+// Styling
+@each $heading, $size in $headings {
+	#{$heading},
+	.#{$heading} {
+		font-size: $size;
+	}
+}
+
+#{headings()} {
+	margin: 0 0 24px;
+	font-family: var(--font-family-heading);
+}
